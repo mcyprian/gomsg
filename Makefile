@@ -1,11 +1,15 @@
 GO=go
 
-.PHONY: all run fmt
+.PHONY: all run fmt build-image
 
-all: build run
+all: clean build run
 
 build:
 	@go build -o build/bin/gomsg
+
+build-image:
+	@docker build -t mcyprian/gomsg:latest .
+	@docker push mcyprian/gomsg:latest
 
 run:
 	build/bin/gomsg
