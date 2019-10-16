@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gomsg-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '5'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+spec:
+  rules:
+  - host: $GOMSG_INGRESS_DOMAIN
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: gomsg
+          servicePort: 80

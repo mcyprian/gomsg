@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gomsg
+  namespace: gomsg
+data:
+  DEBUG: "false"
+  GIN_MODE: "release"

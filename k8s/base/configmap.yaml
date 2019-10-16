@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gomsg
+  namespace: gomsg
+data:
+  LIST_LENGHT: "100"
