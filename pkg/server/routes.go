@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Message represents stored messages
 type Message struct {
 	Msg string `json:"msg" binding:"required"`
 	Ts  int64  `json:"ts" binding:"required"`
