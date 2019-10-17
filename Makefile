@@ -1,6 +1,4 @@
-GO=go
-
-.PHONY: all run fmt build-image
+.PHONY: all run fmt build-image test
 
 all: clean build run
 
@@ -13,6 +11,9 @@ build-image:
 
 run:
 	build/bin/gomsg
+
+test:
+	@go test -v ./pkg/...
 
 fmt:
 	@gofmt -l -w . pkg
