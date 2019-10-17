@@ -1,8 +1,13 @@
 package main
 
-import "github.com/mcyprian/gomsg/pkg/server"
+import (
+	"fmt"
+
+	"github.com/mcyprian/gomsg/pkg/server"
+)
 
 func main() {
 	config := loadConfig()
-	server.Run(config.Port, config.ListLength)
+	router := server.NewRouter(config.ListLength)
+	router.Run(fmt.Sprintf(":%v", config.Port))
 }

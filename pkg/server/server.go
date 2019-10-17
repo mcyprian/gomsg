@@ -1,22 +1,21 @@
 package server
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/mcyprian/gomsg/pkg/datastore"
 )
 
 var db datastore.MsgDatastore
 
-func Run(port int, listLenght int) {
-	r := gin.Default()
+// NewRouter set up the router for gomsg server
+func NewRouter(listLenght int) *gin.Engine {
+	router := gin.Default()
 	if db == nil {
 		db = datastore.NewMsgMemoryBuffer(listLenght)
 	}
-	r.GET("/healthz", healthz)
-	r.POST("/message", addMessage)
-	r.GET("/messages", getAllMessages)
+	router.GET("/healthz", healthz)
+	router.POST("/message", addMessage)
+	router.GET("/messages", getAllMessages)
 
-	r.Run(fmt.Sprintf(":%v", port))
+	return router
 }
