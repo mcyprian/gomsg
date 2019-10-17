@@ -22,7 +22,7 @@ spec:
       - name: gomsg
         image: mcyprian/gomsg:0.0.1
         ports:
-        - containerPort: 8080
+        - containerPort: $GOMSG_PORT
         resources:
           requests:
             memory: 500M
@@ -38,7 +38,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8080
+            port: $GOMSG_PORT
             scheme: HTTP
           initialDelaySeconds: 30
           periodSeconds: 10
@@ -47,7 +47,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /backoffice/v1/ping
-            port: 8080
+            port: $GOMSG_PORT
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 2

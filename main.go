@@ -3,5 +3,6 @@ package main
 import "github.com/mcyprian/gomsg/pkg/server"
 
 func main() {
-	server.Run()
+	config := loadConfig()
+	server.Run(config.Port, config.ListLength)
 }

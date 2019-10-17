@@ -3,8 +3,6 @@ package main
 import (
 	"os"
 	"strconv"
-
-	"github.com/jinzhu/copier"
 )
 
 const (
@@ -18,24 +16,21 @@ type config struct {
 }
 
 func loadConfig() *config {
-	var err Error
-	port, ok := os.LookupEnv("GOMSG_PORT")
-	if !ok {
-		port = defaultPort
-	} else {
-		port, err = strconv.ParseInt(port, 10, 32)
-		if err != nil {
-			port = defaultPort
+	port := defaultPort
+	listLength := defaultListLength
+	portStr, ok := os.LookupEnv("GOMSG_PORT")
+	if ok {
+		convertedPort, err := strconv.ParseInt(portStr, 10, 32)
+		if err == nil {
+			port = int(convertedPort)
 		}
 	}
-	listLength, ok := os.LookupEnv("LIST_LENGTH")
+	listLengthStr, ok := os.LookupEnv("LIST_LENGTH")
 	if ok {
-		listLength, err = strconv.ParseInt(port, 10, 32)
-		if err != nil {
-			listLength = defaultListLength
+		convertedListLength, err := strconv.ParseInt(listLengthStr, 10, 32)
+		if err == nil {
+			listLength = int(convertedListLength)
 		}
-	} else {
-		listLength = defaultListLength
 	}
 	return &config{Port: port, ListLength: listLength}
 }
